@@ -25,31 +25,34 @@ public class LotteryTest {
 	private Lottery lottery;
 	private Tickets mockTickets;
 	private CashRegister mockCashRegister;
-	private PrintStream stdout;
+	private PrintStream stdOut;
+	private ByteArrayOutputStream testOut;
 	
 	
 	@Before
 	public void init() {
+		initObjects();
+		redirectStdout();
+	}
+	
+	private void initObjects() {
 		lottery = new Lottery();
 		mockTickets = mock(Tickets.class);
 		mockCashRegister = mock(CashRegister.class);
 		
 		lottery.setTickets(mockTickets);
 		lottery.setCashRegister(mockCashRegister);
-		stdout = System.out;
+	}
+
+	private void redirectStdout() {
+		stdOut = System.out;
+		testOut = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(testOut));
 	}
 	
 	@After
 	public void tearDown() {
-		System.setOut(stdout);
-	}
-	
-	@Test
-	public void theCashRegisterStartsAt200() {
-		lottery = new Lottery();
-		
-		assertThat(lottery.getCashRegister()).isNotNull();
-		assertThat(lottery.getCashRegister().getTotal()).isEqualTo(200);
+		System.setOut(stdOut);
 	}
 	
 	@Test
@@ -72,16 +75,12 @@ public class LotteryTest {
 	
 	@Test
 	public void theNumberOfTheBoughtTicketIsDisplayed() {
-		ByteArrayOutputStream temporaryOut = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(temporaryOut));
-		
 		int ticketBought = 1;
 		when(mockTickets.buy(anyInt(), anyString())).thenReturn(ticketBought);
 		
 		lottery.read(BUY_COMMAND + " " + NAME_ANDRE);
 		
-		assertThat(temporaryOut.toString()).isEqualTo(ticketBought + System.lineSeparator());
-		
+		assertThat(testOut.toString()).isEqualTo(ticketBought + System.lineSeparator());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
