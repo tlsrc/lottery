@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.tristanles.TestValues.BUY_COMMAND;
+import static org.tristanles.TestValues.DRAW_COMMAND;
 import static org.tristanles.TestValues.NAME_ANDRE;
 
 import java.io.ByteArrayOutputStream;
@@ -25,9 +26,10 @@ public class LotteryTest {
 	private Lottery lottery;
 	private Tickets mockTickets;
 	private CashRegister mockCashRegister;
+	private Draw mockDraw;
+	
 	private PrintStream stdOut;
 	private ByteArrayOutputStream testOut;
-	
 	
 	@Before
 	public void init() {
@@ -86,6 +88,13 @@ public class LotteryTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void iCantBuyATicketWithoutAName() {		
 		lottery.read(BUY_COMMAND);
+	}
+	
+	@Test
+	public void iCanStartADraw() {
+		lottery.read(DRAW_COMMAND);
+		
+		verify(mockDraw).draw(mockTickets, mockCashRegister);
 	}
 
 }
