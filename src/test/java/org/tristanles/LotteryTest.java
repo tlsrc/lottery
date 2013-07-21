@@ -44,7 +44,8 @@ public class LotteryTest {
 		assertThat(lottery.getSubscribers().get(1).getName()).isEqualTo(andréName);
 	}
 	
-	public void iCanBuyMultipleTicketsWithDifferentNams() {
+	@Test
+	public void iCanBuyMultipleTicketsWithDifferentNames() {
 		lottery.read(buyCommand + " " + andréName);
 		lottery.read(buyCommand + " " + sylvieName);
 		lottery.read(buyCommand + " " + dominicName);
@@ -54,5 +55,19 @@ public class LotteryTest {
 		assertThat(lottery.getSubscribers().get(1).getName()).isEqualTo(sylvieName);
 		assertThat(lottery.getSubscribers().get(2).getName()).isEqualTo(dominicName);
 	}
+	
+	@Test
+	public void theCashRegisterStartsAt200() {
+		assertThat(lottery.getCashRegister().getTotal()).isEqualTo(200);
+	}
+	
+	@Test
+	public void buyingATicketCostsTenDollars() {
+		lottery.read(buyCommand + " " + andréName);
+		
+		assertThat(lottery.getCashRegister().getTotal()).isEqualTo(210);
+	}
+	
+	
 
 }

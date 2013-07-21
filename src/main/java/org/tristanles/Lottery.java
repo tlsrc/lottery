@@ -7,9 +7,11 @@ import java.util.Random;
 public class Lottery {
 	
 	List<Subscriber> subscribers;
+	CashRegister cashRegister;
 	
 	public Lottery() {
 		this.subscribers = new ArrayList<Subscriber>();
+		this.cashRegister = new CashRegister(200);
 	}
 	
 	public static void main(String[] args) {
@@ -38,10 +40,14 @@ public class Lottery {
 		int subscriberNumber = new Random().nextInt(49) + 1;
 		String subscriberName = tokens[1];
 		subscribers.add(new Subscriber(subscriberName, subscriberNumber));
-		
+		cashRegister.add(10);
 	}
 
 	public List<Subscriber> getSubscribers() {
 		return subscribers;
+	}
+
+	public CashRegister getCashRegister() {
+		return cashRegister;
 	}
 }
