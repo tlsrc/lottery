@@ -1,17 +1,15 @@
 package org.tristanles;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Lottery {
 	
-	List<Subscriber> subscribers;
+	Tickets tickets;
 	CashRegister cashRegister;
 	
 	public Lottery() {
-		this.subscribers = new ArrayList<Subscriber>();
-		this.cashRegister = new CashRegister(200);
+		this.tickets = new Tickets();
+		this.cashRegister = new CashRegister();
 	}
 	
 	public static void main(String[] args) {
@@ -28,6 +26,10 @@ public class Lottery {
 			return;
 		}
 		
+		if (command.toUpperCase().startsWith("TIRAGE")) {
+			
+		}
+		
 		throw new IllegalArgumentException("Commande non reconnue");
 	}
 
@@ -37,15 +39,32 @@ public class Lottery {
 			throw new IllegalArgumentException("Commande d'achat attendue : \"achat <prénom>\"");
 		}
 		
-		int subscriberNumber = new Random().nextInt(49) + 1;
-		String subscriberName = tokens[1];
-		subscribers.add(new Subscriber(subscriberName, subscriberNumber));
+		String buyerName = tokens[1];
+		int ticketBought = 0;
+		while(ticketBought == 0) {
+			ticketBought = tickets.buy(randomBetween(1, 50), buyerName);
+		}
+
 		cashRegister.add(10);
+		System.out.println(ticketBought);
+	}
+	
+	private int randomBetween(int i, int j) {
+		return new Random().nextInt(j) + i;
 	}
 
-	public List<Subscriber> getSubscribers() {
-		return subscribers;
+	public Tickets getTickets() {
+		return tickets;
 	}
+
+	public void setTickets(Tickets tickets) {
+		this.tickets = tickets;
+	}
+
+	public void setCashRegister(CashRegister cashRegister) {
+		this.cashRegister = cashRegister;
+	}
+
 
 	public CashRegister getCashRegister() {
 		return cashRegister;

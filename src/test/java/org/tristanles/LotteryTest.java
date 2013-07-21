@@ -1,8 +1,19 @@
 package org.tristanles;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.tristanles.utils.Matchers.aListWithOneBuyer;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.tristanles.TestValues.BUY_COMMAND;
+import static org.tristanles.TestValues.NAME_ANDRE;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,62 +23,70 @@ import org.junit.runners.JUnit4;
 public class LotteryTest {
 	
 	private Lottery lottery;
-	private final String buyCommand = "achat";
-	private final String andréName = "André";
-	private final String sylvieName = "Sylvie";
-	private final String dominicName = "Dominic";
+	private Tickets mockTickets;
+	private CashRegister mockCashRegister;
+	private PrintStream stdout;
+	
 	
 	@Before
 	public void init() {
 		lottery = new Lottery();
-	}
-	
-	@Test
-	public void iCanBuyATicketWithAName() {
-		lottery.read(buyCommand + " " + andréName);
+		mockTickets = mock(Tickets.class);
+		mockCashRegister = mock(CashRegister.class);
 		
-		assertThat(lottery.getSubscribers()).is(aListWithOneBuyer(andréName));	
+		lottery.setTickets(mockTickets);
+		lottery.setCashRegister(mockCashRegister);
+		stdout = System.out;
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void iCantBuyATicketWithoutAName() {		
-		lottery.read(buyCommand);
-	}
-	
-	@Test
-	public void iCanBuyMultipleTicketsWithTheSameName() {
-		lottery.read(buyCommand + " " + andréName);
-		lottery.read(buyCommand + " " + andréName);
-		
-		assertThat(lottery.getSubscribers()).hasSize(2);
-		assertThat(lottery.getSubscribers().get(0).getName()).isEqualTo(andréName);
-		assertThat(lottery.getSubscribers().get(1).getName()).isEqualTo(andréName);
-	}
-	
-	@Test
-	public void iCanBuyMultipleTicketsWithDifferentNames() {
-		lottery.read(buyCommand + " " + andréName);
-		lottery.read(buyCommand + " " + sylvieName);
-		lottery.read(buyCommand + " " + dominicName);
-		
-		assertThat(lottery.getSubscribers()).hasSize(3);
-		assertThat(lottery.getSubscribers().get(0).getName()).isEqualTo(andréName);
-		assertThat(lottery.getSubscribers().get(1).getName()).isEqualTo(sylvieName);
-		assertThat(lottery.getSubscribers().get(2).getName()).isEqualTo(dominicName);
+	@After
+	public void tearDown() {
+		System.setOut(stdout);
 	}
 	
 	@Test
 	public void theCashRegisterStartsAt200() {
+		lottery = new Lottery();
+		
+		assertThat(lottery.getCashRegister()).isNotNull();
 		assertThat(lottery.getCashRegister().getTotal()).isEqualTo(200);
 	}
 	
 	@Test
-	public void buyingATicketCostsTenDollars() {
-		lottery.read(buyCommand + " " + andréName);
+	public void theBuyCommandCallsTickets() {
+		when(mockTickets.buy(anyInt(), anyString())).thenReturn(1);
 		
-		assertThat(lottery.getCashRegister().getTotal()).isEqualTo(210);
+		lottery.read(BUY_COMMAND + " " + NAME_ANDRE);
+		
+		verify(mockTickets).buy(anyInt(), eq(NAME_ANDRE));
 	}
 	
+	@Test
+	public void theBuyCommandAdds10InTheCashRegister() {
+		when(mockTickets.buy(anyInt(), anyString())).thenReturn(1);
+		
+		lottery.read(BUY_COMMAND + " " + NAME_ANDRE);
+		
+		verify(mockCashRegister).add(10);
+	}
 	
+	@Test
+	public void theNumberOfTheBoughtTicketIsDisplayed() {
+		ByteArrayOutputStream temporaryOut = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(temporaryOut));
+		
+		int ticketBought = 1;
+		when(mockTickets.buy(anyInt(), anyString())).thenReturn(ticketBought);
+		
+		lottery.read(BUY_COMMAND + " " + NAME_ANDRE);
+		
+		assertThat(temporaryOut.toString()).isEqualTo(ticketBought + System.lineSeparator());
+		
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void iCantBuyATicketWithoutAName() {		
+		lottery.read(BUY_COMMAND);
+	}
 
 }
