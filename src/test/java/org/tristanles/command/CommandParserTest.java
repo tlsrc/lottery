@@ -30,6 +30,7 @@ public class CommandParserTest {
 		LotteryAction action = commandParser.parse(BUY_COMMAND + " " + NAME_ANDRE);
 		
 		assertThat(action).isInstanceOf(BuyAction.class);
+		assertThat(action.getArg()).isEqualTo(NAME_ANDRE);
 	}
 	
 	@Test
@@ -37,6 +38,7 @@ public class CommandParserTest {
 		LotteryAction action = commandParser.parse(BUY_COMMAND);
 		
 		assertThat(action).isInstanceOf(IncorrectAction.class);
+		assertThat(action.getArg()).isNullOrEmpty();
 	}
 	
 	@Test
@@ -44,6 +46,7 @@ public class CommandParserTest {
 		LotteryAction action = commandParser.parse(DRAW_COMMAND);
 		
 		assertThat(action).isInstanceOf(DrawAction.class);
+		assertThat(action.getArg()).isNullOrEmpty();
 	}
 	
 	@Test
@@ -51,6 +54,7 @@ public class CommandParserTest {
 		LotteryAction action = commandParser.parse(WINNERS_COMMAND);
 		
 		assertThat(action).isInstanceOf(WinnersAction.class);
+		assertThat(action.getArg()).isNullOrEmpty();
 	}
 	
 	@Test
@@ -58,5 +62,6 @@ public class CommandParserTest {
 		LotteryAction action = commandParser.parse("");
 		
 		assertThat(action).isInstanceOf(NoAction.class);
+		assertThat(action.getArg()).isNullOrEmpty();
 	}
 }

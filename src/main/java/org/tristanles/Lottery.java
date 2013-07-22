@@ -26,13 +26,13 @@ public class Lottery {
 		consoleInput = new Scanner(System.in);
 	}
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		System.out.println("Bienvenue à la loterie Pyxis");
 		Lottery lottery = new Lottery();
 		lottery.run();
 	}
 
-	private void run() throws IOException {
+	private void run() {
 		String input = null;
 		while ((input = consoleInput.nextLine()) != null) {
 			try {

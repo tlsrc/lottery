@@ -3,7 +3,17 @@ package org.tristanles.actions;
 import org.tristanles.money.CashRegister;
 import org.tristanles.tickets.Tickets;
 
-public interface LotteryAction {
+public abstract class LotteryAction {
 
-	public void execute(Tickets tickets, CashRegister cashRegister);
+	private String arg;
+
+	public abstract void execute(Tickets tickets, CashRegister cashRegister);
+	
+	public void setArg(String arg) {
+		this.arg = arg;
+	}
+	
+	public String getArg() {
+		return arg;
+	}
 }
