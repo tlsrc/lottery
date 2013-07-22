@@ -11,6 +11,7 @@ import static org.tristanles.TestValues.DRAW_COMMAND;
 import static org.tristanles.TestValues.NAME_ANDRE;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import org.junit.After;
@@ -58,7 +59,7 @@ public class LotteryTest {
 	}
 	
 	@Test
-	public void theBuyCommandCallsTickets() {
+	public void theBuyCommandCallsTickets() throws IOException {
 		when(mockTickets.buy(anyString())).thenReturn(1);
 		
 		lottery.parse(BUY_COMMAND + " " + NAME_ANDRE);
@@ -67,7 +68,7 @@ public class LotteryTest {
 	}
 	
 	@Test
-	public void theBuyCommandAdds10InTheCashRegister() {
+	public void theBuyCommandAdds10InTheCashRegister() throws IOException {
 		when(mockTickets.buy(anyString())).thenReturn(1);
 		
 		lottery.parse(BUY_COMMAND + " " + NAME_ANDRE);
@@ -76,7 +77,7 @@ public class LotteryTest {
 	}
 	
 	@Test
-	public void theNumberOfTheBoughtTicketIsDisplayed() {
+	public void theNumberOfTheBoughtTicketIsDisplayed() throws IOException {
 		int ticketBought = 1;
 		when(mockTickets.buy(anyString())).thenReturn(ticketBought);
 		
@@ -86,12 +87,12 @@ public class LotteryTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void iCantBuyATicketWithoutAName() {		
+	public void iCantBuyATicketWithoutAName() throws IOException {		
 		lottery.parse(BUY_COMMAND);
 	}
 	
 	@Test
-	public void iCanStartADraw() {
+	public void iCanStartADraw() throws IOException {
 		lottery.parse(DRAW_COMMAND);
 		
 		verify(mockTickets).pickWinners(mockCashRegister);

@@ -1,8 +1,6 @@
 package org.tristanles;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import org.tristanles.money.CashRegister;
@@ -12,7 +10,6 @@ import org.tristanles.winners.Winners;
 
 public class Lottery {
 	
-	private Lottery lottery;
 	private Tickets tickets;
 	private CashRegister cashRegister;
 	private Winners winners;
@@ -43,9 +40,9 @@ public class Lottery {
 		}
 	}
 
-	public void parse(String command) {
+	public void parse(String command) throws IOException {
 		if(command == null || command.isEmpty()) {
-			throw new IllegalArgumentException("Commande vide");
+			return;
 		}
 		
 		if(command.toUpperCase().startsWith("ACHAT")) {
@@ -66,6 +63,8 @@ public class Lottery {
 				throw new IllegalArgumentException("Vous devez faire un tirage avant");
 			}
 			System.out.println(winners);
+			tickets = new Tickets();
+			winners = null;
 			return;
 		}
 		
