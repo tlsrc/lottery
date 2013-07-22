@@ -3,6 +3,7 @@ package org.tristanles;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.tristanles.results.WinnersResult;
 import org.tristanles.winners.Winner;
 import org.tristanles.winners.Winners;
 
@@ -54,7 +55,7 @@ public class Tickets {
 		return TICKET_NOT_BOUGHT != (numbersWithBuyer.get(ticketNumber));
 	}
 
-	public Winners pickWinners(CashRegister cashRegister) {
+	public void pickWinners() {
 		int firstTicket = TicketNumberUtils.random();
 		Winner firstWinner = create(firstTicket);
 		
@@ -65,13 +66,17 @@ public class Tickets {
 		Winner thirdWinner = create(thirdTicket);
 		
 		Winners winners = new Winners(firstWinner, secondWinner, thirdWinner);
-		winners.assignPrizes(cashRegister);
-		return winners;
+		//TODO
 	}
 	
 	private Winner create(int ticketNumber) {
 		String name = numbersWithBuyer.get(ticketNumber);
 		return new Winner(name, ticketNumber);
+	}
+
+	public WinnersResult getWinners() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

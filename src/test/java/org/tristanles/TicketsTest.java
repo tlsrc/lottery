@@ -4,11 +4,12 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.tristanles.testutils.TestValues.NAME_ANDRE;
 
+import org.fest.assertions.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.tristanles.winners.Winners;
+import org.tristanles.results.WinnersResult;
 
 @RunWith(JUnit4.class)
 public class TicketsTest {
@@ -50,14 +51,15 @@ public class TicketsTest {
 	
 	@Test
 	public void pickWinnersReturnThreeDifferentTickets() {
-		Winners winners = tickets.pickWinners(mockCashRegister);
-		int firstTicket = winners.getFirst().getTicketNumber();
-		int secondTicket = winners.getSecond().getTicketNumber();
-		int thirdTicket = winners.getThird().getTicketNumber();
-		
-		assertThat(firstTicket).isNotEqualTo(secondTicket).isNotEqualTo(thirdTicket);
-		assertThat(secondTicket).isNotEqualTo(thirdTicket).isNotEqualTo(firstTicket);
-		assertThat(thirdTicket).isNotEqualTo(firstTicket).isNotEqualTo(secondTicket);
+//		WinnersResult winners = tickets.pickWinners(mockCashRegister);
+//		int firstTicket = winners.getFirst().getTicketNumber();
+//		int secondTicket = winners.getSecond().getTicketNumber();
+//		int thirdTicket = winners.getThird().getTicketNumber();
+//		
+//		assertThat(firstTicket).isNotEqualTo(secondTicket).isNotEqualTo(thirdTicket);
+//		assertThat(secondTicket).isNotEqualTo(thirdTicket).isNotEqualTo(firstTicket);
+//		assertThat(thirdTicket).isNotEqualTo(firstTicket).isNotEqualTo(secondTicket);
+		Assertions.fail("TODO");
 		
 	}
 	

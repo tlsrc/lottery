@@ -29,7 +29,7 @@ public class DrawActionTest extends ActionTest {
 	public void drawActionCallsTicketsPickWinners() {
 		drawAction.execute(mockTickets, mockCashRegister);
 		
-		verify(mockTickets).pickWinners(mockCashRegister);
+		verify(mockTickets).pickWinners();
 	}
 	
 	@Test

@@ -8,7 +8,7 @@ import org.tristanles.results.LotteryResult;
 public class DrawAction extends LotteryAction {
 
 	public LotteryResult execute(Tickets tickets, CashRegister cashRegister) {
-		tickets.pickWinners(cashRegister);
+		tickets.pickWinners();
 		return new DrawResult();
 	}
 

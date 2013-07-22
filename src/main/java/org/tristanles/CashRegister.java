@@ -1,5 +1,7 @@
 package org.tristanles;
 
+import org.tristanles.results.WinnersResult;
+
 public class CashRegister {
 
 	public static final int STARTING_MONEY = 200;
