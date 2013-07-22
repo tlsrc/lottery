@@ -5,9 +5,9 @@ import static org.fest.assertions.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.mockito.runners.MockitoJUnitRunner;
 
-@RunWith(JUnit4.class)
+@RunWith(MockitoJUnitRunner.class)
 public class DrawResultTest extends StreamRedirectTest {
 	
 	DrawResult drawResult;
@@ -22,7 +22,7 @@ public class DrawResultTest extends StreamRedirectTest {
 	public void DrawResultDisplayInformationalMessage() {
 		drawResult.display();
 		
-		assertThat(testOut.toString()).isEqualTo("Tirage effectué " + System.lineSeparator());
+		assertThat(testOut.toString()).isEqualTo("Tirage effectué" + System.lineSeparator());
 	}
 	
 	

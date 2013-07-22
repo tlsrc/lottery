@@ -12,7 +12,7 @@ public class StreamRedirectTest {
 	protected ByteArrayOutputStream testOut;
 	
 	@Before
-	public void init() {	
+	public void redirectOutputStream() {	
 		stdOut = System.out;
 		testOut = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(testOut));
