@@ -1,21 +1,46 @@
 package org.tristanles;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
 import org.tristanles.money.CashRegister;
 import org.tristanles.tickets.Tickets;
+import org.tristanles.winners.Winners;
 
 
 public class Lottery {
 	
-	Tickets tickets;
-	CashRegister cashRegister;
+	private Lottery lottery;
+	private Tickets tickets;
+	private CashRegister cashRegister;
+	private Winners winners;
+	
+	private Scanner consoleInput;
 	
 	public Lottery() {
 		this.tickets = new Tickets();
 		this.cashRegister = new CashRegister();
+		this.winners = null;
+		consoleInput = new Scanner(System.in);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("Hello World!");
+	public static void main(String[] args) throws IOException {
+		System.out.println("Bienvenue à la loterie Pyxis");
+		Lottery lottery = new Lottery();
+		lottery.run();
+	}
+
+	private void run() throws IOException {
+		String input = null;
+		while ((input = consoleInput.nextLine()) != null) {
+			try {
+				parse(input);
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	public void parse(String command) {
@@ -32,7 +57,15 @@ public class Lottery {
 		}
 		
 		if (command.toUpperCase().startsWith("TIRAGE")) {
-			tickets.pickWinners( cashRegister);
+			this.winners = tickets.pickWinners( cashRegister);
+			return;
+		}
+		
+		if(command.toUpperCase().startsWith("GAGNANTS")) {
+			if(this.winners == null) {
+				throw new IllegalArgumentException("Vous devez faire un tirage avant");
+			}
+			System.out.println(winners);
 			return;
 		}
 		
@@ -59,7 +92,6 @@ public class Lottery {
 	public void setCashRegister(CashRegister cashRegister) {
 		this.cashRegister = cashRegister;
 	}
-
 
 	public CashRegister getCashRegister() {
 		return cashRegister;

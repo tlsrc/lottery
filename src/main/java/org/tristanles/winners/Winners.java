@@ -1,5 +1,7 @@
 package org.tristanles.winners;
 
+import java.nio.file.FileSystem;
+
 import org.tristanles.money.CashRegister;
 
 public class Winners {
@@ -50,8 +52,15 @@ public class Winners {
 		if(third.isNoOne()) {
 			cashRegister.add(thirdPrize);
 		}
-		
-		
+	}
+	
+	public String toString() {
+		StringBuffer result = new StringBuffer("| 1ère boule \t| 2ème boule \t| 3ème boule \t|");
+		result.append(System.lineSeparator()).append("|");
+		result.append(first).append("\t| ");
+		result.append(second).append("\t| ");
+		result.append(third).append("\t|");
+		return result.toString();
 	}
 	
 }

@@ -28,7 +28,17 @@ public class Winner {
 	}
 
 	public boolean isNoOne() {
-		return this.name != null && this.name != Tickets.TICKET_NOT_BOUGHT;
+		return this.name == null || this.name == Tickets.TICKET_NOT_BOUGHT;
+	}
+	
+	public String toString() {
+		StringBuffer result = new StringBuffer();
+		if(isNoOne()) {
+			result.append(prize).append("$ remis dans la caisse");
+		} else {
+			result.append(name).append(" : ").append(prize).append("$");
+		}
+		return result.toString();
 	}
 	
 }
