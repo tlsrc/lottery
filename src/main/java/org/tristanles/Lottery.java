@@ -1,5 +1,8 @@
 package org.tristanles;
 
+import org.tristanles.money.CashRegister;
+import org.tristanles.tickets.Tickets;
+
 
 public class Lottery {
 	

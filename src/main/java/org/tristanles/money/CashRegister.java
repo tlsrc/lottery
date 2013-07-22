@@ -1,4 +1,4 @@
-package org.tristanles;
+package org.tristanles.money;
 
 public class CashRegister {
 
@@ -15,6 +15,12 @@ public class CashRegister {
 	
 	public void add(int amount) {
 		this.total += amount;
+	}
+
+	public int withdrawTotalPrize() {
+		int half = total / 2;
+		total = total - half;
+		return half;
 	}
 
 }

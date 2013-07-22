@@ -2,6 +2,8 @@ package org.tristanles;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.tristanles.money.CashRegisterTest;
+import org.tristanles.tickets.TicketsTest;
 
 
 @Suite.SuiteClasses({
