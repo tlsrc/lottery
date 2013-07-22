@@ -3,6 +3,7 @@ package org.tristanles;
 import java.io.IOException;
 import java.util.Scanner;
 
+import org.tristanles.command.CommandParser;
 import org.tristanles.money.CashRegister;
 import org.tristanles.tickets.Tickets;
 import org.tristanles.winners.Winners;
@@ -10,6 +11,7 @@ import org.tristanles.winners.Winners;
 
 public class Lottery {
 	
+	private CommandParser commandParser;
 	private Tickets tickets;
 	private CashRegister cashRegister;
 	private Winners winners;
@@ -20,6 +22,7 @@ public class Lottery {
 		this.tickets = new Tickets();
 		this.cashRegister = new CashRegister();
 		this.winners = null;
+		this.commandParser = new CommandParser();
 		consoleInput = new Scanner(System.in);
 	}
 	
@@ -95,4 +98,17 @@ public class Lottery {
 	public CashRegister getCashRegister() {
 		return cashRegister;
 	}
+
+	public void setCommandParser(CommandParser commandParser) {
+		this.commandParser = commandParser;
+	}
+
+	public void setWinners(Winners winners) {
+		this.winners = winners;
+	}
+
+	public void setConsoleInput(Scanner consoleInput) {
+		this.consoleInput = consoleInput;
+	}
+	
 }

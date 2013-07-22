@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.tristanles.command.CommandParser;
 import org.tristanles.money.CashRegister;
 import org.tristanles.tickets.Tickets;
 
@@ -28,6 +29,7 @@ public class LotteryTest {
 	private Lottery lottery;
 	private Tickets mockTickets;
 	private CashRegister mockCashRegister;
+	private CommandParser mockCommandParser;
 	
 	private PrintStream stdOut;
 	private ByteArrayOutputStream testOut;
@@ -42,9 +44,11 @@ public class LotteryTest {
 		lottery = new Lottery();
 		mockTickets = mock(Tickets.class);
 		mockCashRegister = mock(CashRegister.class);
+		mockCommandParser = mock(CommandParser.class);
 		
 		lottery.setTickets(mockTickets);
 		lottery.setCashRegister(mockCashRegister);
+		lottery.setCommandParser(mockCommandParser);
 	}
 
 	private void redirectStdout() {
