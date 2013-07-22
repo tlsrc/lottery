@@ -1,10 +1,11 @@
 package org.tristanles;
 
-import java.io.IOException;
 import java.util.Scanner;
 
+import org.tristanles.actions.LotteryAction;
 import org.tristanles.command.CommandParser;
 import org.tristanles.money.CashRegister;
+import org.tristanles.results.LotteryResult;
 import org.tristanles.tickets.Tickets;
 import org.tristanles.winners.Winners;
 
@@ -35,52 +36,18 @@ public class Lottery {
 	private void run() {
 		String input = null;
 		while ((input = consoleInput.nextLine()) != null) {
-			try {
-				parse(input);
-			} catch(Exception e) {
-				System.out.println(e.getMessage());
-			}
+			read(input);
 		}
 	}
 
-	public void parse(String command) throws IOException {
-		if(command == null || command.isEmpty()) {
-			return;
+	protected void read(String input) {
+		try {
+			LotteryAction action = commandParser.parse(input);
+			LotteryResult result = action.execute(tickets, cashRegister);
+			result.display();
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
 		}
-		
-		if(command.toUpperCase().startsWith("ACHAT")) {
-			String buyerName = parseBuyerName(command);
-			int ticketBought = tickets.buy(buyerName);
-			cashRegister.add(10);
-			System.out.println(ticketBought);
-			return;
-		}
-		
-		if (command.toUpperCase().startsWith("TIRAGE")) {
-			this.winners = tickets.pickWinners( cashRegister);
-			return;
-		}
-		
-		if(command.toUpperCase().startsWith("GAGNANTS")) {
-			if(this.winners == null) {
-				throw new IllegalArgumentException("Vous devez faire un tirage avant");
-			}
-			System.out.println(winners);
-			tickets = new Tickets();
-			winners = null;
-			return;
-		}
-		
-		throw new IllegalArgumentException("Commande non reconnue");
-	}
-
-	private String parseBuyerName(String buyCommand) {
-		String[] tokens = buyCommand.trim().split("\\s+");
-		if (tokens.length != 2) {
-			throw new IllegalArgumentException("Commande d'achat attendue : \"achat <prénom>\"");
-		}
-		
-		return tokens[1];
 	}
 
 	public Tickets getTickets() {

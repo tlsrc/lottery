@@ -3,18 +3,12 @@ package org.tristanles.tickets;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.tristanles.TestValues.NAME_ANDRE;
-import static org.tristanles.TestValues.NAME_DOMINIC;
-import static org.tristanles.TestValues.NAME_SYLVIE;
-import static org.tristanles.TestValues.NAME_ANNIE;
-
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.tristanles.money.CashRegister;
-import org.tristanles.tickets.Tickets;
 import org.tristanles.winners.Winners;
 
 @RunWith(JUnit4.class)

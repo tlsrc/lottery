@@ -1,6 +1,5 @@
 package org.tristanles.winners;
 
-import org.tristanles.tickets.TicketNumberUtils;
 import org.tristanles.tickets.Tickets;
 
 public class Winner {
