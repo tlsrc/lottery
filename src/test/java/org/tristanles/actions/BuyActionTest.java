@@ -12,9 +12,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.tristanles.TestValues;
 import org.tristanles.results.BuyResult;
 import org.tristanles.results.LotteryResult;
+import org.tristanles.testutils.TestValues;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BuyActionTest extends ActionTest {

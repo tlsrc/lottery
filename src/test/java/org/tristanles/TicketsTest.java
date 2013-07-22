@@ -2,7 +2,7 @@ package org.tristanles;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.tristanles.TestValues.NAME_ANDRE;
+import static org.tristanles.testutils.TestValues.NAME_ANDRE;
 
 import org.junit.Before;
 import org.junit.Test;

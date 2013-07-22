@@ -1,4 +1,4 @@
-package org.tristanles;
+package org.tristanles.testutils;
 
 public class TestValues {
 	

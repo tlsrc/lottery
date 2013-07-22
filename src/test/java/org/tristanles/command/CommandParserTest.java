@@ -1,6 +1,6 @@
 package org.tristanles.command;
 
-import static org.tristanles.TestValues.*;
+import static org.tristanles.testutils.TestValues.*;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.junit.Before;
