@@ -5,14 +5,22 @@ import org.tristanles.tickets.Tickets;
 
 public class BuyAction extends LotteryAction {
 	
-	public void execute(Tickets tickets, CashRegister cashRegister) {
-		// TODO Auto-generated method stub
+	public String execute(Tickets tickets, CashRegister cashRegister) {
+		if(hasNoBuyer()) {
+			throw new RuntimeException("Pas d'acheteur spécifié");
+		}
 		
+		int ticketNumber = tickets.buy(buyerName());
+		cashRegister.add(Tickets.PRICE);
+		return String.valueOf(ticketNumber);
 	}
-
-	public void setBuyerName(String nameAndre) {
-		// TODO Auto-generated method stub
-		
+	
+	private String buyerName() {
+		return arg;
+	}
+	
+	private boolean hasNoBuyer() {
+		return arg == null || arg.isEmpty();
 	}
 
 }

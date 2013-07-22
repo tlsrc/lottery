@@ -5,9 +5,9 @@ import org.tristanles.tickets.Tickets;
 
 public class DrawAction extends LotteryAction {
 
-	public void execute(Tickets tickets, CashRegister cashRegister) {
+	public String execute(Tickets tickets, CashRegister cashRegister) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

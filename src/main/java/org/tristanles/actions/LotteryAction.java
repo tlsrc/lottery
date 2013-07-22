@@ -5,9 +5,10 @@ import org.tristanles.tickets.Tickets;
 
 public abstract class LotteryAction {
 
-	private String arg;
+	protected String arg;
+	protected String result;
 
-	public abstract void execute(Tickets tickets, CashRegister cashRegister);
+	public abstract String execute(Tickets tickets, CashRegister cashRegister);
 	
 	public void setArg(String arg) {
 		this.arg = arg;
@@ -15,5 +16,9 @@ public abstract class LotteryAction {
 	
 	public String getArg() {
 		return arg;
+	}
+	
+	public String getResult() {
+		return result;
 	}
 }

@@ -10,6 +10,7 @@ import org.tristanles.winners.Winners;
 public class Tickets {
 
 	public static final String TICKET_NOT_BOUGHT = "";
+	public static final int PRICE = 10;
 	
 	protected Map<Integer, String> numbersWithBuyer;
 
