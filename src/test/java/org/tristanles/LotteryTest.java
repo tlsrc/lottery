@@ -12,9 +12,7 @@ import org.junit.runners.JUnit4;
 import org.mockito.InOrder;
 import org.tristanles.actions.LotteryAction;
 import org.tristanles.command.CommandParser;
-import org.tristanles.money.CashRegister;
 import org.tristanles.results.LotteryResult;
-import org.tristanles.tickets.Tickets;
 
 @RunWith(JUnit4.class)
 public class LotteryTest {

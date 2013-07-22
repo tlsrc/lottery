@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 import org.tristanles.actions.LotteryAction;
 import org.tristanles.command.CommandParser;
-import org.tristanles.money.CashRegister;
 import org.tristanles.results.LotteryResult;
-import org.tristanles.tickets.Tickets;
 import org.tristanles.winners.Winners;
 
 

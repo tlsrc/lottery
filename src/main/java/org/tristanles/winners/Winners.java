@@ -2,7 +2,7 @@ package org.tristanles.winners;
 
 import java.nio.file.FileSystem;
 
-import org.tristanles.money.CashRegister;
+import org.tristanles.CashRegister;
 
 public class Winners {
 	

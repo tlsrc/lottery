@@ -1,8 +1,8 @@
 package org.tristanles.actions;
 
 import org.mockito.Mock;
-import org.tristanles.money.CashRegister;
-import org.tristanles.tickets.Tickets;
+import org.tristanles.CashRegister;
+import org.tristanles.Tickets;
 
 
 public class ActionTest {

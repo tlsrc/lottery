@@ -1,6 +1,6 @@
 package org.tristanles.winners;
 
-import org.tristanles.tickets.Tickets;
+import org.tristanles.Tickets;
 
 public class Winner {
 

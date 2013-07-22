@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.tristanles.money.CashRegister;
+import org.tristanles.CashRegister;
+import org.tristanles.Tickets;
 import org.tristanles.results.LotteryResult;
-import org.tristanles.tickets.Tickets;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DrawActionTest extends ActionTest {
