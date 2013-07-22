@@ -2,7 +2,7 @@ package org.tristanles.command;
 
 import org.tristanles.actions.LotteryAction;
 
-public class Command {
+class Command {
 
 	private String commandRegex;
 	private LotteryAction correspondingAction;
