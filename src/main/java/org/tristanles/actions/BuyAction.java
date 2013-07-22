@@ -1,18 +1,20 @@
 package org.tristanles.actions;
 
 import org.tristanles.money.CashRegister;
+import org.tristanles.results.BuyResult;
+import org.tristanles.results.LotteryResult;
 import org.tristanles.tickets.Tickets;
 
 public class BuyAction extends LotteryAction {
 	
-	public String execute(Tickets tickets, CashRegister cashRegister) {
+	public LotteryResult execute(Tickets tickets, CashRegister cashRegister) {
 		if(hasNoBuyer()) {
 			throw new RuntimeException("Pas d'acheteur spécifié");
 		}
 		
 		int ticketNumber = tickets.buy(buyerName());
 		cashRegister.add(Tickets.PRICE);
-		return String.valueOf(ticketNumber);
+		return new BuyResult(ticketNumber);
 	}
 	
 	private String buyerName() {

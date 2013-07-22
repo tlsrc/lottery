@@ -1,6 +1,7 @@
 package org.tristanles.actions;
 
 import org.tristanles.money.CashRegister;
+import org.tristanles.results.LotteryResult;
 import org.tristanles.tickets.Tickets;
 
 public abstract class LotteryAction {
@@ -8,7 +9,7 @@ public abstract class LotteryAction {
 	protected String arg;
 	protected String result;
 
-	public abstract String execute(Tickets tickets, CashRegister cashRegister);
+	public abstract LotteryResult execute(Tickets tickets, CashRegister cashRegister);
 	
 	public void setArg(String arg) {
 		this.arg = arg;
