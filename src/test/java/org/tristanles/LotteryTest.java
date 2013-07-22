@@ -1,7 +1,6 @@
 package org.tristanles;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -26,7 +25,6 @@ public class LotteryTest {
 	private Lottery lottery;
 	private Tickets mockTickets;
 	private CashRegister mockCashRegister;
-	private Draw mockDraw;
 	
 	private PrintStream stdOut;
 	private ByteArrayOutputStream testOut;
@@ -59,18 +57,18 @@ public class LotteryTest {
 	
 	@Test
 	public void theBuyCommandCallsTickets() {
-		when(mockTickets.buy(anyInt(), anyString())).thenReturn(1);
+		when(mockTickets.buy(anyString())).thenReturn(1);
 		
-		lottery.read(BUY_COMMAND + " " + NAME_ANDRE);
+		lottery.parse(BUY_COMMAND + " " + NAME_ANDRE);
 		
-		verify(mockTickets).buy(anyInt(), eq(NAME_ANDRE));
+		verify(mockTickets).buy(eq(NAME_ANDRE));
 	}
 	
 	@Test
 	public void theBuyCommandAdds10InTheCashRegister() {
-		when(mockTickets.buy(anyInt(), anyString())).thenReturn(1);
+		when(mockTickets.buy(anyString())).thenReturn(1);
 		
-		lottery.read(BUY_COMMAND + " " + NAME_ANDRE);
+		lottery.parse(BUY_COMMAND + " " + NAME_ANDRE);
 		
 		verify(mockCashRegister).add(10);
 	}
@@ -78,23 +76,23 @@ public class LotteryTest {
 	@Test
 	public void theNumberOfTheBoughtTicketIsDisplayed() {
 		int ticketBought = 1;
-		when(mockTickets.buy(anyInt(), anyString())).thenReturn(ticketBought);
+		when(mockTickets.buy(anyString())).thenReturn(ticketBought);
 		
-		lottery.read(BUY_COMMAND + " " + NAME_ANDRE);
+		lottery.parse(BUY_COMMAND + " " + NAME_ANDRE);
 		
 		assertThat(testOut.toString()).isEqualTo(ticketBought + System.lineSeparator());
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void iCantBuyATicketWithoutAName() {		
-		lottery.read(BUY_COMMAND);
+		lottery.parse(BUY_COMMAND);
 	}
 	
 	@Test
 	public void iCanStartADraw() {
-		lottery.read(DRAW_COMMAND);
+		lottery.parse(DRAW_COMMAND);
 		
-		verify(mockDraw).draw(mockTickets, mockCashRegister);
+		verify(mockTickets).pickWinners(mockCashRegister);
 	}
 
 }

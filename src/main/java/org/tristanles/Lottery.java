@@ -1,6 +1,5 @@
 package org.tristanles;
 
-import java.util.Random;
 
 public class Lottery {
 	
@@ -16,41 +15,34 @@ public class Lottery {
 		System.out.println("Hello World!");
 	}
 
-	public void read(String command) {
+	public void parse(String command) {
 		if(command == null || command.isEmpty()) {
 			throw new IllegalArgumentException("Commande vide");
 		}
 		
 		if(command.toUpperCase().startsWith("ACHAT")) {
-			buy(command);
+			String buyerName = parseBuyerName(command);
+			int ticketBought = tickets.buy(buyerName);
+			cashRegister.add(10);
+			System.out.println(ticketBought);
 			return;
 		}
 		
 		if (command.toUpperCase().startsWith("TIRAGE")) {
-			
+			tickets.pickWinners( cashRegister);
+			return;
 		}
 		
 		throw new IllegalArgumentException("Commande non reconnue");
 	}
 
-	private void buy(String buyCommand) {
+	private String parseBuyerName(String buyCommand) {
 		String[] tokens = buyCommand.trim().split("\\s+");
 		if (tokens.length != 2) {
 			throw new IllegalArgumentException("Commande d'achat attendue : \"achat <prénom>\"");
 		}
 		
-		String buyerName = tokens[1];
-		int ticketBought = 0;
-		while(ticketBought == 0) {
-			ticketBought = tickets.buy(randomBetween(1, 50), buyerName);
-		}
-
-		cashRegister.add(10);
-		System.out.println(ticketBought);
-	}
-	
-	private int randomBetween(int i, int j) {
-		return new Random().nextInt(j) + i;
+		return tokens[1];
 	}
 
 	public Tickets getTickets() {

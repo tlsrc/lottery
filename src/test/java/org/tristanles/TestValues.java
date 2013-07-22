@@ -8,6 +8,7 @@ public class TestValues {
 	public static final String NAME_ANDRE = "André";
 	public static final String NAME_SYLVIE = "Sylvie";
 	public static final String NAME_DOMINIC = "Dominic";
+	public static final String NAME_ANNIE = "Lucie";
 
 	private TestValues() {
 	}
