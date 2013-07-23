@@ -24,7 +24,7 @@ public class Lottery {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("Bienvenue à la loterie Pyxis");
+		System.out.println("Bienvenue à la loterie");
 		Lottery lottery = new Lottery();
 		lottery.run();
 	}

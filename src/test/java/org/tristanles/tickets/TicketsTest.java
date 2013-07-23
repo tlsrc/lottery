@@ -105,6 +105,6 @@ public class TicketsTest {
 		tickets.reset();
 		
 		assertThat(tickets.getWinners()).isNull();
-		//buyers are reset too
+		assertThat(tickets.buy(NAME_ANDRE)).isNotNull();
 	}
 }
