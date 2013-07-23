@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.tristanles.Messages;
 import org.tristanles.Winner;
 import org.tristanles.results.WinnersResult;
 
@@ -52,7 +53,7 @@ public class Tickets {
 	
 	public void pickWinners() {
 		if (getWinners() != null) {
-			throw new IllegalStateException("Les gagnants ont déjà été tirés");
+			throw new IllegalStateException(Messages.GAGNANTS_DEJA_TIRES);
 		}
 		
 		List<Integer> winningTickets = new ArrayList<Integer>(3);

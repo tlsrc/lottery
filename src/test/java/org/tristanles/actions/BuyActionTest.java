@@ -3,6 +3,7 @@ package org.tristanles.actions;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.fest.assertions.api.Assertions.fail;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -12,8 +13,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.tristanles.Messages;
+import org.tristanles.Winner;
 import org.tristanles.results.BuyResult;
 import org.tristanles.results.LotteryResult;
+import org.tristanles.results.WinnersResult;
 import org.tristanles.testutils.TestValues;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -33,7 +37,6 @@ public class BuyActionTest extends ActionTest {
 		
 		verify(mockTickets).buy(TestValues.NAME_ANDRE);
 		verify(mockCashRegister).add(10);
-		verifyNoMoreInteractions(mockTickets, mockCashRegister);
 	}
 	
 	@Test
@@ -52,7 +55,24 @@ public class BuyActionTest extends ActionTest {
 			fail("Exception expected");
 		} catch (Exception e) {
 			verifyZeroInteractions(mockTickets, mockCashRegister);
-			assertThat(e.getMessage()).isEqualTo("Pas d'acheteur spécifié");
+			assertThat(e.getMessage()).isEqualTo(Messages.PAS_DACHETEUR_SPECIFIE);
+		}
+	}
+	
+	@Test
+	public void theBuyActionFailsIfWinnersPicked() {
+		Winner firstWinner = new Winner(TestValues.NAME_ANDRE, 1);
+		Winner secondWinner = new Winner(TestValues.NAME_ANDRE, 2);
+		Winner thirdWinner = new Winner(TestValues.NAME_ANDRE, 3);
+		when(mockTickets.getWinners()).thenReturn(new WinnersResult(firstWinner, secondWinner, thirdWinner));
+		
+		try {
+			buyAction.execute(mockTickets, mockCashRegister);
+			fail("Exception expected");
+		} catch (Exception e) {
+			verify(mockTickets, never()).buy(anyString());
+			verifyZeroInteractions(mockCashRegister);
+			assertThat(e.getMessage()).isEqualTo(Messages.GAGNANTS_DEJA_TIRES);
 		}
 	}
 	
