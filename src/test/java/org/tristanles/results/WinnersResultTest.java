@@ -9,7 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.tristanles.Winner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class WinnersResultTest extends StreamRedirectTest{
+public class WinnersResultTest extends StreamRedirectTest {
 
 	private WinnersResult winnersResult;
 	private Winner firstWinner;

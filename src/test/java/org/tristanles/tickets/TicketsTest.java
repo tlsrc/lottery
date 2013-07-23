@@ -55,24 +55,35 @@ public class TicketsTest {
 	}
 
 	@Test
+	public void iCantPickWinnersTwice() {
+		tickets.pickWinners();
+		try {
+			tickets.pickWinners();
+			fail("Exception expected");
+		} catch (Exception e) {
+			assertThat(e.getMessage()).isEqualTo("Les gagnants ont déjà été tirés");
+		}
+	}
+
+	@Test
 	public void iCanPickEmptyWinnersIfThereAreNoBuyers() {
 
 		tickets.pickWinners();
 		WinnersResult winners = tickets.getWinners();
-		
+
 		assertThat(winners.getFirst().getName()).isEmpty();
 		assertThat(winners.getSecond().getName()).isEmpty();
 		assertThat(winners.getThird().getName()).isEmpty();
 		assertThreeDifferentTicketNumbers(winners);
 	}
-	
+
 	@Test
 	public void iCanPickWinnersIfThereAreBuyers() {
 		buyNTickets(50, NAME_ANDRE);
-		
+
 		tickets.pickWinners();
 		WinnersResult winners = tickets.getWinners();
-		
+
 		assertThat(winners.getFirst().getName()).isEqualTo(NAME_ANDRE);
 		assertThat(winners.getSecond().getName()).isEqualTo(NAME_ANDRE);
 		assertThat(winners.getThird().getName()).isEqualTo(NAME_ANDRE);
@@ -80,9 +91,12 @@ public class TicketsTest {
 	}
 
 	private void assertThreeDifferentTicketNumbers(WinnersResult winners) {
-		assertThat(winners.getFirst().getTicketNumber()).isNotEqualTo(winners.getSecond().getTicketNumber());
-		assertThat(winners.getFirst().getTicketNumber()).isNotEqualTo(winners.getThird().getTicketNumber());
-		assertThat(winners.getSecond().getTicketNumber()).isNotEqualTo(winners.getThird().getTicketNumber());
+		assertThat(winners.getFirst().getTicketNumber()).isNotEqualTo(
+				winners.getSecond().getTicketNumber());
+		assertThat(winners.getFirst().getTicketNumber()).isNotEqualTo(
+				winners.getThird().getTicketNumber());
+		assertThat(winners.getSecond().getTicketNumber()).isNotEqualTo(
+				winners.getThird().getTicketNumber());
 	}
 
 }

@@ -1,6 +1,5 @@
 package org.tristanles.results;
 
-import org.tristanles.CashRegister;
 import org.tristanles.Winner;
 
 public class WinnersResult implements LotteryResult {
@@ -15,11 +14,6 @@ public class WinnersResult implements LotteryResult {
 		this.third = third;
 	}
 	
-	public void assignPrizes(CashRegister cashRegister) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void display() {
 		// TODO Auto-generated method stub
 	}

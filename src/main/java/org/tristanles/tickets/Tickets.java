@@ -54,7 +54,9 @@ public class Tickets {
 	}
 	
 	public void pickWinners() {
-		checkNoWinners();
+		if (getWinners() != null) {
+			throw new IllegalStateException("Les gagnants ont déjà été tirés");
+		}
 		
 		List<Integer> winningTickets = new ArrayList<Integer>(3);
 		while(winningTickets.size() < 3) {
@@ -68,12 +70,6 @@ public class Tickets {
 		Winner secondWinner = buildWinner(winningTickets.get(1));
 		Winner thirdWinner = buildWinner(winningTickets.get(2));
 		winners = new WinnersResult(firstWinner, secondWinner, thirdWinner);
-	}
-	
-	private void checkNoWinners() {
-		if (winners != null) {
-			throw new IllegalStateException("Les gagnants ont déjà été tirés");
-		}
 	}
 	
 	private Winner buildWinner(int ticketNumber) {

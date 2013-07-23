@@ -38,4 +38,5 @@ public class DrawActionTest extends ActionTest {
 		
 		assertThat(result).isInstanceOf(LotteryResult.class);
 	}
+	
 }

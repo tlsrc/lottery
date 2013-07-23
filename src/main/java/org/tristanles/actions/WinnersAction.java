@@ -13,8 +13,7 @@ public class WinnersAction extends LotteryAction {
 			throw new RuntimeException("Aucun tirage n'a été fait");
 		}
 		
-		winners.assignPrizes(cashRegister);
-		return winners;
+		return cashRegister.assignPrizes(winners);
 	}
 
 }

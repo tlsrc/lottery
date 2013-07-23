@@ -47,7 +47,7 @@ public class WinnersActionTest extends ActionTest {
 	}
 	
 	@Test
-	public void winnersActionPickWinnersAndAssignPrizes() {
+	public void winnersActionAssignPrizes() {
 		when(mockTickets.getWinners()).thenReturn(mockWinnersResult);
 		
 		winnersAction.execute(mockTickets, mockCashRegister);
