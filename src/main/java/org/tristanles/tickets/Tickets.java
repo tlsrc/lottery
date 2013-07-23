@@ -20,10 +20,7 @@ public class Tickets {
 	private final TicketsUtils ticketsUtils = new TicketsUtils();
 
 	public Tickets() {
-		this.ticketsBuyers = new HashMap<Integer, String>();
-		for(int i = FIRST_TICKET; i <= LAST_TICKET; i++) {
-			ticketsBuyers.put(i, NO_BUYER);
-		}
+		reset();
 	}
 
 	public int buy(String buyerName) {
@@ -81,7 +78,11 @@ public class Tickets {
 		return winners;
 	}
 
-	public void resetWinners() {
+	public void reset() {
 		winners = null;
+		this.ticketsBuyers = new HashMap<Integer, String>();
+		for(int i = FIRST_TICKET; i <= LAST_TICKET; i++) {
+			ticketsBuyers.put(i, NO_BUYER);
+		}
 	}
 }

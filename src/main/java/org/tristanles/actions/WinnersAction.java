@@ -14,7 +14,7 @@ public class WinnersAction extends LotteryAction {
 		}
 		
 		LotteryResult result = cashRegister.assignPrizes(winners);
-		tickets.resetWinners();
+		tickets.reset();
 		return result;
 	}
 

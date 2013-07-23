@@ -15,6 +15,7 @@ public class WinnersResultTest extends StreamRedirectTest {
 	private Winner firstWinner;
 	private Winner secondWinner;
 	private Winner thirdWinner;
+	private Winner noWinner;
 	
 	@Before
 	public void init() {
@@ -24,16 +25,33 @@ public class WinnersResultTest extends StreamRedirectTest {
 		secondWinner.setPrize(15);
 		thirdWinner = new Winner("Third", 3);
 		thirdWinner.setPrize(10);
-		
-		winnersResult = new WinnersResult(firstWinner, secondWinner, thirdWinner);
+		noWinner = new Winner("", 4);
+		noWinner.setPrize(75);
 	}
 	
 	@Test
-	public void winnersResultDisplaysATable(){
+	public void winnersResultDisplaysATable() {
+		winnersResult = new WinnersResult(firstWinner, secondWinner, thirdWinner);
+		
 		StringBuilder expectedOutput = new StringBuilder();
 		expectedOutput.append(" 1ère boule   | 2ème boule   | 3ème boule   ");
 		expectedOutput.append(System.lineSeparator());							
 		expectedOutput.append(" First : 75$  | Second : 15$ | Third : 10$  ");
+		expectedOutput.append(System.lineSeparator());
+		
+		winnersResult.display();
+		
+		assertThat(testOut.toString()).isEqualTo(expectedOutput.toString());
+	}
+	
+	@Test
+	public void winnersResultDisplaysATableWithOneWinnerMissing() {
+		winnersResult = new WinnersResult(noWinner, secondWinner, thirdWinner);
+		
+		StringBuilder expectedOutput = new StringBuilder();
+		expectedOutput.append(" 1ère boule              | 2ème boule              | 3ème boule              ");
+		expectedOutput.append(System.lineSeparator());							
+		expectedOutput.append(" (remis en caisse) : 75$ | Second : 15$            | Third : 10$             ");
 		expectedOutput.append(System.lineSeparator());
 		
 		winnersResult.display();

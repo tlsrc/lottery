@@ -42,7 +42,12 @@ public class WinnersResult implements LotteryResult {
 	}
 
 	private StringBuilder buildBottomCell(Winner winner) {
-		return new StringBuilder(" ").append(winner.getName()).append(" : ").append(winner.getPrize()).append("$ ");
+		String winnerName = winner.getName();
+		if(winner.isNoOne()) {
+			winnerName = "(remis en caisse)";
+		}
+		
+		return new StringBuilder(" ").append(winnerName).append(" : ").append(winner.getPrize()).append("$ ");
 	}
 	
 	private int getMaxLength(List<StringBuilder> cells) {

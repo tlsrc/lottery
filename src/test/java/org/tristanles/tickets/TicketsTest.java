@@ -100,10 +100,11 @@ public class TicketsTest {
 	}
 
 	@Test
-	public void iCanResetTheWinners() {
+	public void iCanResetTheTickets() {
 		tickets.pickWinners();
-		tickets.resetWinners();
+		tickets.reset();
 		
 		assertThat(tickets.getWinners()).isNull();
+		//buyers are reset too
 	}
 }
