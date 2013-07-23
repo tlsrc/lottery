@@ -55,6 +55,7 @@ public class WinnersActionTest extends ActionTest {
 		
 		verify(mockTickets).getWinners();
 		verify(mockCashRegister).assignPrizes(mockWinnersResult);
+		verify(mockTickets).resetWinners();
 		verifyNoMoreInteractions(mockWinnersResult, mockCashRegister, mockTickets);
 	}
 }

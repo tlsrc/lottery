@@ -99,4 +99,11 @@ public class TicketsTest {
 				winners.getThird().getTicketNumber());
 	}
 
+	@Test
+	public void iCanResetTheWinners() {
+		tickets.pickWinners();
+		tickets.resetWinners();
+		
+		assertThat(tickets.getWinners()).isNull();
+	}
 }
