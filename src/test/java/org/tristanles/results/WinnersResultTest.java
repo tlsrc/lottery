@@ -30,7 +30,14 @@ public class WinnersResultTest extends StreamRedirectTest {
 	
 	@Test
 	public void winnersResultDisplaysATable(){
+		StringBuilder expectedOutput = new StringBuilder();
+		expectedOutput.append(" 1ère boule   | 2ème boule   | 3ème boule   ");
+		expectedOutput.append(System.lineSeparator());							
+		expectedOutput.append(" First : 75$  | Second : 15$ | Third : 10$  ");
+		expectedOutput.append(System.lineSeparator());
+		
 		winnersResult.display();
-		fail("TODO");
+		
+		assertThat(testOut.toString()).isEqualTo(expectedOutput.toString());
 	}
 }

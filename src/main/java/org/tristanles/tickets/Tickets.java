@@ -80,4 +80,8 @@ public class Tickets {
 	public WinnersResult getWinners() {
 		return winners;
 	}
+
+	public void resetWinners() {
+		winners = null;
+	}
 }
