@@ -39,10 +39,9 @@ public class CashRegister {
 	}
 
 	private void assign(Winner winner, int prize) {
-		if(winner.isNoOne()) {
-			return;
+		if(!winner.isNoOne()) {
+			remove(prize);
 		}
-		remove(prize);
 		winner.setPrize(prize);
 	}
 
