@@ -2,7 +2,7 @@ package org.tristanles.actions;
 
 import org.mockito.Mock;
 import org.tristanles.CashRegister;
-import org.tristanles.Tickets;
+import org.tristanles.tickets.Tickets;
 
 
 public class ActionTest {

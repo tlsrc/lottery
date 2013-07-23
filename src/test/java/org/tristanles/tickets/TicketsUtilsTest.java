@@ -1,4 +1,4 @@
-package org.tristanles;
+package org.tristanles.tickets;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.tristanles.tickets.TicketsUtils;
 
 
 @RunWith(JUnit4.class)

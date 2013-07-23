@@ -22,8 +22,18 @@ public class WinnersResult implements LotteryResult {
 
 	public void display() {
 		// TODO Auto-generated method stub
-		
 	}
-	
+
+	public Winner getFirst() {
+		return first;
+	}
+
+	public Winner getSecond() {
+		return second;
+	}
+
+	public Winner getThird() {
+		return third;
+	}
 
 }

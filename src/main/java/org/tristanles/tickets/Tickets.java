@@ -1,10 +1,11 @@
-package org.tristanles;
+package org.tristanles.tickets;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.tristanles.Winner;
 import org.tristanles.results.WinnersResult;
 
 public class Tickets {
@@ -54,6 +55,7 @@ public class Tickets {
 	
 	public void pickWinners() {
 		checkNoWinners();
+		
 		List<Integer> winningTickets = new ArrayList<Integer>(3);
 		while(winningTickets.size() < 3) {
 			int picked = ticketsUtils.random();

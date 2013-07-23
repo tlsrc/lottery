@@ -1,4 +1,4 @@
-package org.tristanles;
+package org.tristanles.tickets;
 
 import java.util.Random;
 

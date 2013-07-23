@@ -4,8 +4,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.tristanles.CashRegisterTest;
 import org.tristanles.LotteryTest;
-import org.tristanles.TicketsUtilsTest;
-import org.tristanles.TicketsTest;
 import org.tristanles.WinnerTest;
 import org.tristanles.actions.BuyActionTest;
 import org.tristanles.actions.DrawActionTest;
@@ -18,20 +16,15 @@ import org.tristanles.results.DrawResultTest;
 import org.tristanles.results.IncorrectResultTest;
 import org.tristanles.results.NoResultTest;
 import org.tristanles.results.WinnersResultTest;
+import org.tristanles.tickets.TicketsTest;
+import org.tristanles.tickets.TicketsUtilsTest;
 
-@Suite.SuiteClasses({
-		// org.tristanles package
-		CashRegisterTest.class, LotteryTest.class, TicketsUtilsTest.class,
-		TicketsTest.class, WinnerTest.class,
-		// org.tristanles.actions package
+@Suite.SuiteClasses({ CashRegisterTest.class, LotteryTest.class,
+		TicketsUtilsTest.class, TicketsTest.class, WinnerTest.class,
 		BuyActionTest.class, DrawActionTest.class, IncorrectActionTest.class,
-		NoActionTest.class, WinnersActionTest.class,
-		// org.tristanles.command package
-		CommandParserTest.class,
-		// org.tristanles.results package
+		NoActionTest.class, WinnersActionTest.class, CommandParserTest.class,
 		BuyResultTest.class, DrawResultTest.class, IncorrectResultTest.class,
 		NoResultTest.class, WinnersResultTest.class
-
 })
 @RunWith(Suite.class)
 public class TestSuite {

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import org.tristanles.actions.LotteryAction;
 import org.tristanles.command.CommandParser;
 import org.tristanles.results.LotteryResult;
+import org.tristanles.tickets.Tickets;
 
 
 public class Lottery {
