@@ -1,82 +1,85 @@
 package org.tristanles;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.tristanles.results.WinnersResult;
-import org.tristanles.winners.Winner;
-import org.tristanles.winners.Winners;
 
 public class Tickets {
 
-	public static final String TICKET_NOT_BOUGHT = "";
+	public static final String NO_BUYER = "";
+	public static final int FIRST_TICKET = 1;
+	public static final int LAST_TICKET = 50;
 	public static final int PRICE = 10;
 	
-	protected Map<Integer, String> numbersWithBuyer;
+	private Map<Integer, String> ticketsBuyers;
+	private WinnersResult winners;
+	private final TicketsUtils ticketsUtils = new TicketsUtils();
 
 	public Tickets() {
-		this.numbersWithBuyer = new HashMap<Integer, String>(TicketNumberUtils.NUMBER_OF_TICKETS);
-		for(int i = 1; i <= TicketNumberUtils.NUMBER_OF_TICKETS; i++) {
-			numbersWithBuyer.put(i, TICKET_NOT_BOUGHT);
+		this.ticketsBuyers = new HashMap<Integer, String>();
+		for(int i = FIRST_TICKET; i <= LAST_TICKET; i++) {
+			ticketsBuyers.put(i, NO_BUYER);
 		}
 	}
 
 	public int buy(String buyerName) {
-		int ticketNumber = randomFreeTicketNumber();
-		updateTickets(ticketNumber, buyerName);
-		return ticketNumber;
-	}
-
-
-	private void updateTickets(int ticketNumber, String buyerName) {
-		numbersWithBuyer.put(ticketNumber, buyerName);
-	}
-
-	private int randomFreeTicketNumber() {
-		if(allTicketsAreBought()) {
-			throw new IllegalStateException("Tous les tickets sont achetés");
+		checkATicketIsAvailable();
+		
+		int ticketNumber = ticketsUtils.random();
+		while(isTaken(ticketNumber)) {
+			ticketNumber = ticketsUtils.next(ticketNumber);
 		}
 		
-		int ticketNumber = TicketNumberUtils.random();
-		while(isBought(ticketNumber)) {
-			ticketNumber = TicketNumberUtils.next(ticketNumber);
-		}
+		ticketsBuyers.put(ticketNumber, buyerName);
 		return ticketNumber;
 	}
 	
-	private boolean allTicketsAreBought() {
-		for(int i = 1; i <= 50; i ++) {
-			if (! isBought(i)) return false;
+	private void checkATicketIsAvailable() {
+		for(int i = FIRST_TICKET; i <= LAST_TICKET; i++) {
+			if (isAvailable(i)) return; 
 		}
-		return true;
+		throw new IllegalStateException("Tous les tickets sont achetés");
 	}
 	
-	private boolean isBought(int ticketNumber) {
-		return TICKET_NOT_BOUGHT != (numbersWithBuyer.get(ticketNumber));
+	private boolean isAvailable(int i) {
+		return ticketsBuyers.get(i) == NO_BUYER;
 	}
-
+	
+	private boolean isTaken(int i) {
+		return ! isAvailable(i);
+	}
+	
 	public void pickWinners() {
-		int firstTicket = TicketNumberUtils.random();
-		Winner firstWinner = create(firstTicket);
+		checkNoWinners();
+		List<Integer> winningTickets = new ArrayList<Integer>(3);
+		while(winningTickets.size() < 3) {
+			int picked = ticketsUtils.random();
+			if(!winningTickets.contains(picked)) {
+				winningTickets.add(picked);
+			}
+		}
 		
-		int secondTicket = TicketNumberUtils.randomExcept(firstTicket);
-		Winner secondWinner = create(secondTicket);
-		
-		int thirdTicket = TicketNumberUtils.randomExcept(firstTicket, secondTicket);
-		Winner thirdWinner = create(thirdTicket);
-		
-		Winners winners = new Winners(firstWinner, secondWinner, thirdWinner);
-		//TODO
+		Winner firstWinner = buildWinner(winningTickets.get(0));
+		Winner secondWinner = buildWinner(winningTickets.get(1));
+		Winner thirdWinner = buildWinner(winningTickets.get(2));
+		winners = new WinnersResult(firstWinner, secondWinner, thirdWinner);
 	}
 	
-	private Winner create(int ticketNumber) {
-		String name = numbersWithBuyer.get(ticketNumber);
-		return new Winner(name, ticketNumber);
+	private void checkNoWinners() {
+		if (winners != null) {
+			throw new IllegalStateException("Les gagnants ont déjà été tirés");
+		}
+	}
+	
+	private Winner buildWinner(int ticketNumber) {
+		String winnerName = ticketsBuyers.get(ticketNumber);
+		return new Winner(winnerName, ticketNumber);
 	}
 
 	public WinnersResult getWinners() {
-		// TODO Auto-generated method stub
-		return null;
+		return winners;
 	}
-
 }

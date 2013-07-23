@@ -5,7 +5,6 @@ import java.util.Scanner;
 import org.tristanles.actions.LotteryAction;
 import org.tristanles.command.CommandParser;
 import org.tristanles.results.LotteryResult;
-import org.tristanles.winners.Winners;
 
 
 public class Lottery {
@@ -13,14 +12,12 @@ public class Lottery {
 	private CommandParser commandParser;
 	private Tickets tickets;
 	private CashRegister cashRegister;
-	private Winners winners;
 	
 	private Scanner consoleInput;
 	
 	public Lottery() {
 		this.tickets = new Tickets();
 		this.cashRegister = new CashRegister();
-		this.winners = null;
 		this.commandParser = new CommandParser();
 		consoleInput = new Scanner(System.in);
 	}
@@ -66,10 +63,6 @@ public class Lottery {
 
 	public void setCommandParser(CommandParser commandParser) {
 		this.commandParser = commandParser;
-	}
-
-	public void setWinners(Winners winners) {
-		this.winners = winners;
 	}
 
 	public void setConsoleInput(Scanner consoleInput) {

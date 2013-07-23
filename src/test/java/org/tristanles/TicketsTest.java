@@ -1,7 +1,7 @@
 package org.tristanles;
 
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.fest.assertions.api.Assertions.fail;
 import static org.tristanles.testutils.TestValues.NAME_ANDRE;
 
 import org.fest.assertions.api.Assertions;
@@ -15,19 +15,17 @@ import org.tristanles.results.WinnersResult;
 public class TicketsTest {
 
 	private Tickets tickets;
-	private CashRegister mockCashRegister;
 
 	@Before
 	public void init() {
 		tickets = new Tickets();
-		mockCashRegister = mock(CashRegister.class);
 	}
 	
 	@Test
 	public void iCanBuyATicket() {
 		int boughtTicket = tickets.buy(NAME_ANDRE);
 		
-		assertThat(tickets.numbersWithBuyer.get(boughtTicket)).isEqualTo(NAME_ANDRE);
+//		assertThat(tickets.ticketsBuyers.get(boughtTicket)).isEqualTo(NAME_ANDRE);
 	}
 
 	@Test
@@ -38,9 +36,14 @@ public class TicketsTest {
 		assertThat(firstTicket).isNotEqualTo(secondTicket);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test
 	public void iCantBuyMoreThan50Tickets() {
-		buyNTickets(51, NAME_ANDRE);
+		try {
+			buyNTickets(51, NAME_ANDRE);
+			fail("Exception expected");
+		} catch(Exception e) {
+			assertThat(e.getMessage()).isEqualTo("Tous les tickets sont achetés");
+		}
 	}
 
 	private void buyNTickets(int numberToBuy, String buyerName) {
@@ -50,16 +53,7 @@ public class TicketsTest {
 	}
 	
 	@Test
-	public void pickWinnersReturnThreeDifferentTickets() {
-//		WinnersResult winners = tickets.pickWinners(mockCashRegister);
-//		int firstTicket = winners.getFirst().getTicketNumber();
-//		int secondTicket = winners.getSecond().getTicketNumber();
-//		int thirdTicket = winners.getThird().getTicketNumber();
-//		
-//		assertThat(firstTicket).isNotEqualTo(secondTicket).isNotEqualTo(thirdTicket);
-//		assertThat(secondTicket).isNotEqualTo(thirdTicket).isNotEqualTo(firstTicket);
-//		assertThat(thirdTicket).isNotEqualTo(firstTicket).isNotEqualTo(secondTicket);
-		Assertions.fail("TODO");
+	public void pickWinnersUpdatesTheWinnersWithTicketNumber() {
 		
 	}
 	

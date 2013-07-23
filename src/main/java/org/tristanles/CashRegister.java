@@ -25,4 +25,9 @@ public class CashRegister {
 		return half;
 	}
 
+	public void assignPrizes(WinnersResult mockWinnersResult) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

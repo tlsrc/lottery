@@ -1,6 +1,5 @@
-package org.tristanles.winners;
+package org.tristanles;
 
-import org.tristanles.Tickets;
 
 public class Winner {
 
@@ -27,7 +26,7 @@ public class Winner {
 	}
 
 	public boolean isNoOne() {
-		return this.name == null || this.name == Tickets.TICKET_NOT_BOUGHT;
+		return this.name == null || this.name == Tickets.NO_BUYER;
 	}
 	
 	public String toString() {
